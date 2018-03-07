@@ -6,6 +6,8 @@ import org.junit.Test;
  * 1、链表（Linked list）是一种常见的基础数据结构，是一种线性表，
  * 但是并不会按线性的顺序存储数据，而是在每一个节点里存到下一个节点的指针(Pointer)。也就是说，节点之间是逻辑相连，物理不相连。
  * 2、链表可以随时扩充，可以充分利用内存空间，但是读取速度慢（查找慢），插入快，删除快。但是增加了节点的指针域，所以空间开销大。
+ * 3、下面实现的实际上是一个栈。
+ * 4、单向链表不能在链表中间插入节点。
  */
 
 
@@ -148,7 +150,7 @@ public class SingleLinkedList {
         System.out.println("isEmpty:"+list.isEmpty());
         //查找指定元素
         System.out.println("find : b -->"+list.find('b').data);
-        
+
         System.out.println(list);
     }
 
