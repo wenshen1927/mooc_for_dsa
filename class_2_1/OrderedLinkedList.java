@@ -4,7 +4,7 @@ import org.junit.Test;
 
 /**
  * 有序链表：链表中的数据有序
- * 相对于有序数组，有序链表插入删除速度更快，适合频繁插入删除的操作
+ * 相对于有序数组，有序链表插入删除最值速度更快
  */
 
 public class OrderedLinkedList {
@@ -30,6 +30,7 @@ public class OrderedLinkedList {
     public void add(int value) {
         Node node = new Node(value);
 
+        //用一个当前节点和前一个节点来指定位置
         Node current = head;
         Node pre = null;
 
