@@ -3,7 +3,10 @@ package com.dsa.mooc.class_2_2;
 import org.junit.Test;
 
 /**
- * 用数组来实现堆栈
+ * 用数组来实现一个简单的堆栈
+ * 缺点：1、堆栈的容量一旦初始化，就不可改变，可以考虑实现一个可以扩容的堆栈。
+ *      2、由于是数组实现的，所以堆栈只能存储同一个类型的数据，可以考虑使用Object类型。
+ *      3、可以改用链表就不需要初始化容量啦。
  */
 
 public class StackByArray {
@@ -20,8 +23,8 @@ public class StackByArray {
 
     //入栈
     public void push(int data) {
-        if (top < maxSize - 1) {
-            arr[++top] = data;
+        if (top < maxSize - 1) {//栈未满，可以入栈
+            arr[++top] = data;//top先加1，在做数组赋值
         }
     }
 
