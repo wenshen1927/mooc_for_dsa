@@ -4,6 +4,7 @@ import org.junit.Test;
 
 /**
  * 链表实现堆栈
+ * 注意：栈顶指针应该在链表的头部，
  */
 
 public class StackByLinkedList {

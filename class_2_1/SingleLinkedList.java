@@ -50,6 +50,7 @@ public class SingleLinkedList {
 
     }
 
+
     //在链表头删除元素
     public boolean removeHead() {
         if (size == 0) {
@@ -115,18 +116,18 @@ public class SingleLinkedList {
 
     //显示节点信息（遍历链表）
     public void display() {
-       if (size <= 0){//空表，输出空
-           System.out.println("[]");
-       }else {//线性表非空，则从head开始遍历
-           Node current = head;
-           int tempSize = size;
-           while (tempSize > 0){
-               System.out.print(current.data+" ");
-               current = current.next;
-               tempSize--;
-           }
-           System.out.println();
-       }
+        if (size <= 0) {//空表，输出空
+            System.out.println("[]");
+        } else {//线性表非空，则从head开始遍历
+            Node current = head;
+            int tempSize = size;
+            while (tempSize > 0) {
+                System.out.print(current.data + " ");
+                current = current.next;
+                tempSize--;
+            }
+            System.out.println();
+        }
     }
 
     @Test
@@ -147,9 +148,9 @@ public class SingleLinkedList {
         System.out.println(list.delete('a'));
         list.display();
         //判断链表是否为空
-        System.out.println("isEmpty:"+list.isEmpty());
+        System.out.println("isEmpty:" + list.isEmpty());
         //查找指定元素
-        System.out.println("find : b -->"+list.find('b').data);
+        System.out.println("find : b -->" + list.find('b').data);
 
         System.out.println(list);
     }
