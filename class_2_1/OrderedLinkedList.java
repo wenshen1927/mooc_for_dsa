@@ -30,7 +30,7 @@ public class OrderedLinkedList {
     public void add(int value) {
         Node node = new Node(value);
 
-        //用一个当前节点和前一个节点来指定位置
+        //1、用一个临时的当前节点和前一个节点来确定新的Node的位置
         Node current = head;
         Node pre = null;
 
@@ -39,7 +39,7 @@ public class OrderedLinkedList {
             pre = current;
             current = current.next;
         }
-
+        //2、把新的node插入到pre和current指定的位置
         if (pre == null) {//说明是一个空链表
             head = node;
             head.next = current;//是否多此一举?遍历的时候需要，每次遍历都需要把当前中间节点向后移动一格。
@@ -65,7 +65,7 @@ public class OrderedLinkedList {
             System.out.print(current.data + " ");
             current = current.next;
         }
-        System.out.println( );
+        System.out.println();
     }
 
     @Test
