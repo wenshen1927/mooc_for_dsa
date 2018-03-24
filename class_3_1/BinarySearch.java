@@ -17,7 +17,7 @@ public class BinarySearch {
      * @param value
      * @return
      */
-    public static int search(int[] arr, int value) {
+    public  int search(int[] arr, int value) {
         int lo = 0;
         int hi = arr.length - 1;
         int mid;
@@ -42,7 +42,7 @@ public class BinarySearch {
             System.out.print(arr[i] + " ");
         }
         System.out.println();
-        int i = search(arr, k);
-        System.out.println(i);
+//        int i = search(arr, k);
+//        System.out.println(i);
     }
 }
