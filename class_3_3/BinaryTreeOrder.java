@@ -10,6 +10,8 @@ import org.omg.CORBA.PUBLIC_MEMBER;
 
 public class BinaryTreeOrder {
 
+    private Node root;
+
     private class Node {
         private Object data;
         private Node leftChild;
