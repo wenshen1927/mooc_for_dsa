@@ -108,10 +108,10 @@ public class HomoTree {
         if (n1[r1].leftChild != -1 && n2[r2].leftChild != -1 &&
                 (n1[n1[r1].leftChild] == n2[n2[r2].leftChild])) {
             return (isomorphism(n1, n1[r1].leftChild, n2, n2[r2].leftChild) &&
-                    isomorphism(n1, n1[r1].rightChild, n2, n2[r2].rightChild);
+                    isomorphism(n1, n1[r1].rightChild, n2, n2[r2].rightChild));
         } else {//比较树1.左和树2.右 && 树1.右和树2.左；左右互换
             return (isomorphism(n1, n1[r1].leftChild, n2, n2[r2].rightChild) &&
-                    isomorphism(n1, n1[r1].rightChild, n2, n2[r2].leftChild);
+                    isomorphism(n1, n1[r1].rightChild, n2, n2[r2].leftChild));
         }
 
 
@@ -120,8 +120,20 @@ public class HomoTree {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
+        Object[] o1 = buildTree(sc);
+        Object[] o2 = buildTree(sc);
 
+        Node[] n1 = (Node[]) o1[0];
+        int r1 = (int) o1[1];
 
+        Node[] n2 = (Node[]) o2[0];
+        int r2 = (int) o2[1];
+
+        boolean result = isomorphism(n1, r1, n2, r2);
+        if (result)
+            System.out.println("YES");
+        else
+            System.out.println("NO");
     }
 }
 
