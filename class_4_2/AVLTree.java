@@ -73,6 +73,7 @@ public class AVLTree {
         while (root.rightChild != null) {
             root = root.rightChild;
         }
+        return root;
     }
     // TODO: 2018/4/7 增加树的遍历（递归与非递归）
 
