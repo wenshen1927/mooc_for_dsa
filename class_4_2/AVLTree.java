@@ -20,7 +20,12 @@ public class AVLTree {
 
         public Node(int data) {
             this.data = data;
+            this.height = 0;
         }
+    }
+
+    public AVLTree() {
+        root = null;
     }
 
     /**
@@ -33,12 +38,43 @@ public class AVLTree {
         return root.height;
     }
 
+    public int getHeight() {
+        return getHeight(root);
+    }
+
     /**
      * 比较大小
      */
     private int max(int a, int b) {
         return (a > b) ? a : b;
     }
+
+    /**
+     * 获取树的最小节点:返回根节点为root的AVL树的最小节点
+     */
+    private Node minimum(Node root) {
+        if (root == null) {
+            return null;
+        }
+        while (root.leftChild != null) {
+            root = root.leftChild;
+        }
+        return root;
+    }
+
+
+    /**
+     * 获取树的最大节点:返回根节点为root的AVL树的最大节点
+     */
+    private Node maximum(Node root) {
+        if (root == null) {
+            return null;
+        }
+        while (root.rightChild != null) {
+            root = root.rightChild;
+        }
+    }
+    // TODO: 2018/4/7 增加树的遍历（递归与非递归）
 
     /**
      * LL旋转(画图易懂)
@@ -110,7 +146,7 @@ public class AVLTree {
                 root.leftChild = insert(root.leftChild, key);
                 //检查树是否平衡
                 if ((getHeight(root.leftChild) - getHeight(root.rightChild)) == 2) {
-                    if (key < root.leftChild.data) {//若插入左节点下面，则对根节点做左左旋转
+                    if (key < root.leftChild.data) {//若插入左节点左边，则对根节点做左左旋转
                         root = leftLeftRotation(root);
                     } else {//若插入左子节点的右边，则对根节点做左右旋转
                         root = leftRightRotation(root);
@@ -130,11 +166,78 @@ public class AVLTree {
             }
         }
 
+        //插入完毕，更新当前节点的高度
         root.height = max(getHeight(root.leftChild), getHeight(root.rightChild));
 
         return root;
     }
 
-    //删除节点
+    /**
+     * 删除指定节点，并返回根节点
+     *
+     * @param root
+     * @param key
+     * @return
+     */
+    public Node remove(Node root, int key) {
+        if (root == null) {//树为空，无法删除
+            return null;
+        }
+        if (key < root.data) {
+            root.leftChild = remove(root.leftChild, key);
+            //删除完若树失衡，进行调整
+            if (getHeight(root.rightChild) - getHeight(root.leftChild) == 2) {
+                Node r = root.rightChild;
+                if (getHeight(r.leftChild) > getHeight(r.rightChild)) {
+                    root = rightLeftRotation(root);
+                } else {
+                    root = rightRightRotation(root);
+                }
+            }
+        } else if (key > root.data) {
+            root.rightChild = remove(root.rightChild, key);
+            if (getHeight(root.leftChild) - getHeight(root.rightChild) == 2) {
+                Node l = root.leftChild;
+                if (getHeight(l.leftChild) > getHeight(l.rightChild)) {
+                    root = leftLeftRotation(root);
+                } else {
+                    root = leftRightRotation(root);
+                }
+
+            } else {//若root正对应着要删除的对象
+                //若root的左右子节点都不为空
+                if (root.leftChild != null && root.rightChild != null) {
+                    if (getHeight(root.leftChild) > getHeight(root.rightChild)) {
+                        // 如果tree的左子树比右子树高；
+                        // 则(01)找出tree的左子树中的最大节点
+                        //   (02)将该最大节点的值赋值给tree。
+                        //   (03)删除该最大节点。
+                        // 这类似于用"tree的左子树中最大节点"做"tree"的替身；
+                        // 采用这种方式的好处是：删除"tree的左子树中最大节点"之后，AVL树仍然是平衡的。
+                        Node max = maximum(root.leftChild);
+                        root.data = max.data;
+                        root.leftChild = remove(root.leftChild, max.data);//改变要删除的节点
+                    } else {
+                        // 如果tree的左子树不比右子树高(即它们相等，或右子树比左子树高1)
+                        // 则(01)找出tree的右子树中的最小节点
+                        //   (02)将该最小节点的值赋值给tree。
+                        //   (03)删除该最小节点。
+                        // 这类似于用"tree的右子树中最小节点"做"tree"的替身；
+                        // 采用这种方式的好处是：删除"tree的右子树中最小节点"之后，AVL树仍然是平衡的。
+                        Node min = minimum(root.rightChild);
+                        root.data = min.data;
+                        root.rightChild = remove(root.rightChild, min.data);
+                    }
+                } else {
+                    //仅有左子节点或右子节点，把子节点放在root上就好了
+                    //若无左子节点，则把root节点设为null
+                    Node tmp = root;
+                    root = (root.leftChild != null) ? root.leftChild : root.rightChild;
+                    tmp = null;
+                }
+            }
+        }
+        return root;
+    }
 }
 
