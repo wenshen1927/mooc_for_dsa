@@ -168,7 +168,7 @@ public class AVLTree {
         }
 
         //插入完毕，更新当前节点的高度
-        root.height = max(getHeight(root.leftChild), getHeight(root.rightChild));
+        root.height = max(getHeight(root.leftChild), getHeight(root.rightChild)) + 1;
 
         return root;
     }
@@ -239,6 +239,46 @@ public class AVLTree {
             }
         }
         return root;
+    }
+
+    /**
+     * key        -- 节点的键值
+     * direction  --  0，表示该节点是根节点;
+     * -1，表示该节点是它的父结点的左孩子;
+     * 1，表示该节点是它的父结点的右孩子。
+     */
+    private void print(Node root, int key, int direction) {
+        if (root != null) {
+            if (direction == 0) {
+                System.out.printf("%2d is root\n", root.data, key);
+            } else {
+                System.out.printf("%2d is %2d's %6s child", root.data, key, direction == 1 ? "right" : "left");
+            }
+            System.out.println();
+
+
+            print(root.leftChild, root.data, -1);
+            print(root.rightChild, root.data, 1);
+        }
+    }
+
+    public void print() {
+        if (root != null) {
+            print(root, root.data, 0);
+        }
+    }
+
+    public static void main(String[] args) {
+        AVLTree tree = new AVLTree();
+        tree.root = tree.insert(tree.root, 20);
+        tree.root = tree.insert(tree.root, 10);
+        tree.root = tree.insert(tree.root, 0);
+        tree.root = tree.insert(tree.root, 30);
+        tree.root = tree.insert(tree.root, -1);
+        tree.root = tree.insert(tree.root, -2);
+        tree.root = tree.insert(tree.root, -3);
+        tree.root = tree.insert(tree.root, -4);
+        tree.print();
     }
 }
 
