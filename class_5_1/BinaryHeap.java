@@ -6,7 +6,7 @@ import com.dsa.mooc.class_4_1.BinSearchTree;
  * 堆：（以最大堆为例）
  * 1、完全二叉树（用数组表示）2、关键字的最大值在根节点上
  */
-
+//todo:这个类目前还有些问题
 public class BinaryHeap {
 
     private Node[] heapArray;//存储堆元素的数组
@@ -136,7 +136,7 @@ public class BinaryHeap {
     //堆基本上是无序的，所以难以遍历或者查找。但是能快速地移除最大值或者插入新的节点。
     public void display() {
         if (!isEmpty()) {
-            for (int i = 0; i < heapArray.length; i++) {
+            for (int i = 0; i < currentSize; i++) {
                 System.out.printf("index:%d ", i);
                 System.out.printf("value:%d ", heapArray[i].data);
                 System.out.println();
@@ -148,35 +148,40 @@ public class BinaryHeap {
 
     public static void main(String[] args) {
         int[] a = {10, 40, 30, 60, 90, 70, 20, 50, 80};
-        BinaryHeap heap = new BinaryHeap(9);
-        heap.display();
-
-        //1、(线性复杂度)创建的最大堆
-//        heap.createMaxHeap(a);
-
-        //2、一般方法创建的最大堆（复杂度NlogN）
-        System.out.println("依次添加元素");
-        for (int i = 0; i < a.length; i++) {
-            System.out.printf("%d ", a[i]);
-            heap.insert(a[i]);
-        }
+        BinaryHeap heap = new BinaryHeap(10);
+        System.out.printf("\n== 最 大 堆: %s", heap);
         System.out.println();
         heap.display();
-
+        //1、(线性复杂度)创建的最大堆
+        heap.createMaxHeap(a);
+        heap.display();
+        //2、一般方法创建的最大堆（复杂度NlogN）
+//        System.out.println("依次添加元素");
+//        for (int i = 0; i < a.length; i++) {
+//            System.out.printf("%d ", a[i]);
+//            heap.insert(a[i]);
+//        }
+//        System.out.println();
+//        heap.display();
+        System.out.println();
         System.out.printf("\n== 最 大 堆: %s", heap);
         int i = 85;
         heap.insert(i);
         System.out.printf("\n 添加元素:%d", i);
         System.out.printf("\n最大堆:%s", heap);
-
+        System.out.println();
+        heap.display();
 
         int max = heap.deleteMax().data;
         System.out.printf("\n删除最大值:%d", max);
         System.out.printf("\n== 最 大 堆: %s", heap);
+        System.out.println();
+        heap.display();
 
         max = heap.deleteMax().data;
         System.out.printf("\n删除最大值:%d", max);
         System.out.printf("\n== 最 大 堆: %s", heap);
-
+        System.out.println();
+        heap.display();
     }
 }
