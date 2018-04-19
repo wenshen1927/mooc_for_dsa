@@ -84,7 +84,7 @@ public class BinaryHeap {
         }
         Node root = heapArray[1];
         //先用currentSize来代替root的位置
-        heapArray[1] = heapArray[--currentSize];//这里之所以用--currentSize，而不用currentSize--，是因为在上面insert的时候，每次插入完，currentSize都会加1，最后一次插入之后currentSize要比真实size大1.所以这里先-1，使currentSize指向最后一个元素。
+        heapArray[1] = heapArray[currentSize--];//这里之所以用--currentSize，而不用currentSize--，是因为在上面insert的时候，每次插入完，currentSize都会加1，最后一次插入之后currentSize要比真实size大1.所以这里先-1，使currentSize指向最后一个元素。
         //再从根节点调整堆的有序性
         trickleDown(1);
         return root;
@@ -143,6 +143,15 @@ public class BinaryHeap {
             }
         } else {
             System.out.println("heap is empty!");
+        }
+    }public void displayHeap() {
+        System.out.println("heapArray(array format): ");
+        for (int i = 0; i < currentSize; i++) {
+            if (heapArray[i] != null) {
+                System.out.print(heapArray[i].data+ " ");
+            } else {
+                System.out.print("--");
+            }
         }
     }
 

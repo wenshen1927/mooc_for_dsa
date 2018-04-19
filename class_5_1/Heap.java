@@ -114,6 +114,7 @@ public class Heap {
 
         int max = heap.remove().getKey();
         System.out.println("remove max :" + max);
+        heap.displayHeap();
 
     }
 }

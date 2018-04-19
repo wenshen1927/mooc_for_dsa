@@ -33,6 +33,13 @@ public class MyHeap<T> {
         buildHeap();
     }
 
+    public MyHeap(T[] a, int maxSize, Comparator<? super T> c) {
+        this.heap = a;
+        this.c = c;
+        this.maxSize = maxSize;
+        buildHeap();
+    }
+
     /**
      * 创建堆：线性复杂度的创建方法：找到最后一个节点的父节点，从父节点开始，从右到左对每一个节点堆化
      */
@@ -97,7 +104,7 @@ public class MyHeap<T> {
     /**
      * 堆化（从给定索引开始，范围内堆化）
      *
-     * @param i
+     * @param i 根节点索引
      * @param size 堆化的范围
      */
     public void heapify(int i, int size) {
@@ -200,7 +207,14 @@ public class MyHeap<T> {
                 break;
             }
             heap[index] = heap[largeIndex];
-            index = largeIndex;
+            index = largeIndex;//根节点下调到较大（小）的子节点
+        }
+        heap[index] = top;
+    }
+
+    public void display() {
+        for (int i = 0; i < currentSize; i++) {
+            System.out.print(heap[i] + " ");
         }
     }
 
@@ -217,8 +231,8 @@ public class MyHeap<T> {
             }
         };
 
-        MyHeap maxHeap = new MyHeap(temp, c);
-
-
+        MyHeap maxHeap = new MyHeap(temp,  c);
+//        maxHeap.insert(new Integer(17));
+        maxHeap.display();
     }
 }
