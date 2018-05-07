@@ -1,4 +1,7 @@
-package com.dsa.mooc.class_5_4;
+package com.dsa.mooc.class_6_1;
+
+import java.io.IOException;
+import java.util.Scanner;
 
 /**
  * 图结构一般有三种实现方式：
@@ -44,6 +47,47 @@ public class MatrixUDG {
         }
     }
 
+    /**
+     * 创建图：自己输入数据
+     */
+    public MatrixUDG() {
+
+        // 输入"顶点数"和"边数"
+        System.out.printf("input vertex number: ");
+        int vlen = readInt();
+        System.out.printf("input edge number: ");
+        int elen = readInt();
+        if (vlen < 1 || elen < 1 || (elen > (vlen * (vlen - 1)))) {
+            System.out.printf("input error: invalid parameters!\n");
+            return;
+        }
+
+        // 初始化"顶点"
+        mVexs = new char[vlen];
+        for (int i = 0; i < mVexs.length; i++) {
+            System.out.printf("vertex(%d): ", i);
+            mVexs[i] = readChar();
+        }
+
+        // 初始化"边"
+        mMatrix = new int[vlen][vlen];
+        for (int i = 0; i < elen; i++) {
+            // 读取边的起始顶点和结束顶点
+            System.out.printf("edge(%d):", i);
+            char c1 = readChar();
+            char c2 = readChar();
+            int p1 = getPosition(c1);
+            int p2 = getPosition(c2);
+
+            if (p1 == -1 || p2 == -1) {
+                System.out.printf("input error: invalid edge!\n");
+                return;
+            }
+
+            mMatrix[p1][p2] = 1;
+            mMatrix[p2][p1] = 1;
+        }
+    }
 
     /**
      * 找到边对应的顶点在矩阵（点集）中的坐标
@@ -58,6 +102,28 @@ public class MatrixUDG {
             }
         }
         return -1;
+    }
+
+    /*
+     * 读取一个输入字符
+     */
+    private char readChar() {
+        char ch = '0';
+
+        do {
+            try {
+                ch = (char) System.in.read();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } while (!((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z')));
+
+        return ch;
+    }
+
+    private int readInt() {
+        Scanner sc = new Scanner(System.in);
+        return sc.nextInt();
     }
 
     public void display() {
