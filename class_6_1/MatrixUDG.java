@@ -150,4 +150,6 @@ public class MatrixUDG {
         pG = new MatrixUDG(vexs, edges);
         pG.display();
     }
+
+
 }
