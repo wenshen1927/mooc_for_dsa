@@ -65,7 +65,8 @@ public class BinaryHeap {
         //找到node应该在的位置
         while (heapArray[index].data > heapArray[parent].data) {//当前节点大于父节点
             //更新Index节点
-            heapArray[index] = heapArray[parent];
+            swap(heapArray[index], heapArray[parent]);
+//            heapArray[index] = heapArray[parent];
             //交换当前节点的索引
             index = parent;
             //更新parent索引
@@ -73,6 +74,12 @@ public class BinaryHeap {
 
         }
         heapArray[index] = bottom;
+    }
+
+    private void swap(Node node1, Node node2) {
+        Node temp = node1;
+        node1 = node2;
+        node2 = temp;
     }
 
     //删除最大值（最大堆）:删除一定是删根节点（最大值）
@@ -118,8 +125,9 @@ public class BinaryHeap {
 
     //建立堆：
     //方法一：直接插入最大堆O(nlogn)
-    //方法二：（线性复杂度）先将n个元素按输入顺序插入，先满足完全二叉树的结构特性
-    //      再调整成一个堆(见视频讲解)
+    //方法二：线性复杂度把一个数组调成一个最大（小）堆
+    //      (1)（线性复杂度）先将n个元素按输入顺序插入，先满足完全二叉树的结构特性
+    //      (2) 再调整成一个堆(见视频讲解)
     public void createMaxHeap(int[] arr) {
         int lastNode = currentSize / 2;
         Node[] nodes = new Node[arr.length];
@@ -144,11 +152,13 @@ public class BinaryHeap {
         } else {
             System.out.println("heap is empty!");
         }
-    }public void displayHeap() {
+    }
+
+    public void displayHeap() {
         System.out.println("heapArray(array format): ");
         for (int i = 0; i < currentSize; i++) {
             if (heapArray[i] != null) {
-                System.out.print(heapArray[i].data+ " ");
+                System.out.print(heapArray[i].data + " ");
             } else {
                 System.out.print("--");
             }

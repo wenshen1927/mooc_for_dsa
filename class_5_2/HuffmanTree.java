@@ -2,6 +2,12 @@ package com.dsa.mooc.class_5_2;
 
 import java.util.List;
 
+/**
+ * 霍夫曼树：根据节点不同的查找频率构造查找树，使带权路径长度最小
+ * 做法：
+ * 1、对所有子树根据权值排序；（注意这里的排序可以使用普通的快速排序，更好的做法是用堆）
+ * 2、把最小的两个子树合并，合并后的新权值为两个子树的权值之和；
+ */
 public class HuffmanTree {
     private Node root;
 

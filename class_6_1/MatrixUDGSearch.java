@@ -81,6 +81,14 @@ public class MatrixUDGSearch {
         }
     }
 
+    public void DFS1() {
+        boolean[] visited = new boolean[mVertex.length];
+        for (int i = 0; i < visited.length; i++) {
+            visited[i] = false;
+        }
+
+    }
+
     public static void main(String[] args) {
 
         char[] vexs = {'A', 'B', 'C', 'D', 'E', 'F', 'G'};
